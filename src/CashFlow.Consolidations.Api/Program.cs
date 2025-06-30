@@ -5,14 +5,12 @@ using CashFlow.Infrastructure.Shared.DependencyInjection;
 using CashFlow.Infrastructure.Shared.Swagger;
 using CashFlow.ServiceDefaults;
 using CashFlow.Consolidations.Application.Extensions;
-using CashFlow.BuildingBlocks.DependencyInjection;
 
 var builder = WebApplication.CreateBuilder(args);
 builder.AddDefaultLogging();
 
 builder.AddServiceDefaults();
 builder.Services.AddSharedInfrastructureServices(builder.Configuration)
-    .AddBuildingBlocksServices()
     .AddConsolidationsApplication()
     .AddCustomApiVersioning()
     .AddCustomSwagger(builder.Configuration)
