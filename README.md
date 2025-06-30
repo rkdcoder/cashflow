@@ -245,7 +245,7 @@ senha: OpahIt2025
   > 
   > Certifique-se de que o Docker está rodando normalmente antes de iniciar o próximo passo.
 
-- **.NET 8 SDK** ou superior instalado na máquina
+- **.NET 9 SDK** ou superior instalado na máquina
 
 - **Git** para clonar o repositório
 
