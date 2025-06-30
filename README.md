@@ -274,7 +274,7 @@ Siga estes passos:
 
 1. Abra o Postman
 
-2. Importe o arquivo `Docs/Teste Opah.postman_collection.json`
+2. Importe o arquivo [Teste Opah.postman_collection.json](https://github.com/rkdcoder/cashflow/blob/main/Docs/Teste%20Opah.postman_collection.json)
 
 3. Ajuste (se necessário) a variável de ambiente para o endpoint correto (`localhost` ou conforme indicado pelo Aspire)
 
