@@ -1,0 +1,141 @@
+# Build results
+[Bb]in/
+[Oo]bj/
+
+# User-specific files
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+
+# Rider/JetBrains
+.idea/
+*.sln.iml
+
+# Visual Studio Code
+.vscode/
+
+# ASP.NET Scaffolding
+ScaffoldingReadMe.txt
+
+# Files built by Visual Studio
+*.builds
+*.dbmdl
+*.pfx
+*.publishsettings
+*.vspscc
+*.vssscc
+*.cache
+*.log
+
+# IIS
+.vs/
+*.vspscc
+
+# Entity Framework Migrations
+Migrations/
+
+# NuGet Packages
+*.nupkg
+# The packages folder can be ignored because of Package Restore
+**/packages/*
+!**/packages/build/
+!**/packages/repositories.config
+
+# Paket dependency manager
+.paket/
+paket-files/
+
+# DotCover
+*.dotCover
+
+# NCrunch
+*.ncrunch*
+*.nunit.*
+
+# Azure Pipelines
+.azure-pipelines/
+pipelines/
+
+# Local test results
+TestResults/
+*.TestResults/
+*.trx
+*.coverage
+*.coveragexml
+
+# Code Coverage results
+coverage/
+lcov-report/
+*.coverage
+*.coveragexml
+
+# Reports
+reports/
+
+# Resharper
+_ReSharper*/
+*.[Rr]e[Ss]harper
+*.DotSettings.user
+
+# StyleCop
+StyleCopReport.xml
+
+# SonarQube
+.sonar/
+
+# Build results of dotnet publish
+**/publish/
+**/out/
+
+# npm, Yarn
+node_modules/
+yarn.lock
+package-lock.json
+
+# log files
+*.log
+
+# Tools
+tools/
+
+# Docker files
+docker-compose.override.yml
+docker-compose.*
+*.env
+
+# Global .NET tools
+.dotnet/
+
+# Mac
+.DS_Store
+
+# Windows
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+
+# Others
+*.swp
+*.swo
+
+# JetBrains Rider cache
+.idea/
+
+# Temp files
+~$*
+*.tmp
+
+# Local secrets
+secrets.json
+
+# LocalSettings for development
+appsettings.Development.json
+appsettings.Local.json
+
+# User-specific secrets for development
+*.localsettings.json
+
+# Don't ignore NuGet config if present at root
+!NuGet.config

@@ -1,0 +1,256 @@
+﻿@page "/"
+
+@using System.Net.Http.Headers
+@using System.Text.Json
+@inject HttpClient Http
+
+<h3>Stress Test - Consolidation API</h3>
+
+<div class="form-group mb-3">
+    <label>User:</label>
+    <input class="form-control" @bind="username" />
+</div>
+<div class="form-group mb-3">
+    <label>Password:</label>
+    <input type="password" class="form-control" @bind="password" />
+</div>
+<div class="form-group mb-3">
+    <label>Consolidation Date:</label>
+    <input class="form-control" type="date" @bind="selectedDate" />
+</div>
+<div class="form-group mb-3">
+    <label>Request Count:</label>
+    <input type="number" class="form-control" @bind="requestCount" min="1" max="1000" />
+</div>
+<div class="form-group mb-3">
+    <button class="btn btn-primary" @onclick="CreateEntry" disabled="@creatingEntry">
+        @(creatingEntry ? "Creating entry..." : "Create Entry")
+    </button>
+    <button class="btn btn-success ms-2" @onclick="RunStressTest" disabled="@running">
+        @(running ? "Testing..." : "Run Stress Test")
+    </button>
+</div>
+
+<p style="color: gray">
+    Make sure the API is running at <code>localhost:9000</code>
+</p>
+
+@if (showSummary)
+{
+    <div class="alert alert-info">
+        <strong>Summary:</strong><br />
+        Total requests: <b>@summary.Total</b><br />
+        Average requests per second: <b>@summary.AvgPerSecond</b><br />
+        Total time: <b>@summary.TotalTime</b> ms<br />
+    </div>
+}
+
+<ul class="list-unstyled">
+    @foreach (var log in logs)
+    {
+        <li style="color:@(log.IsSuccess ? "green" : "red")">
+            @log.Message
+        </li>
+    }
+</ul>
+
+@code {
+    string username = "admin";
+    string password = "OpahIt2025";
+    int requestCount = 100;
+    DateTime selectedDate = DateTime.Today;
+
+    bool running = false;
+    bool creatingEntry = false;
+
+    List<LogEntry> logs = new();
+
+    bool showSummary = false;
+    TestSummary summary = new();
+
+    string[] categories = new[]
+    {
+        "cbb3f1ea-91cb-42e8-8daf-f68bfa520c2f",
+        "f841be5a-9923-419b-87a2-c3654e02620a",
+        "fdaacfad-b3c9-4c5a-9c3b-3ce9667fabed",
+        "929ed0ff-d817-4a82-8124-3dfcd6a1f9ce",
+        "b0c380a7-8472-4e45-a04d-5f9920b2877a",
+        "63eb96fe-2c91-43b9-b415-c65ee867e2bd",
+        "283b1aca-ef7a-4fce-bcbb-8752e2153c08",
+        "a11d43e6-96d6-415f-b2fe-6f0a55970eb9",
+        "f38043ac-9294-4909-af22-e260f9e871bb",
+        "56e7533b-4e48-4483-b387-4aee71e454bd",
+        "47b934b2-e7ec-4dd9-b89e-f542b37505ca",
+        "96d8efc8-61f1-4007-9917-0862b0f2f57a",
+        "c5617a27-be6e-4848-82e8-bbf0f6548097",
+        "b1ac6638-318d-423f-8c4c-fa3f614fd2e1",
+        "054a551e-9841-4bef-ad35-8bb9a381a916",
+        "c87bfe80-d970-410f-b503-5355c5a372d3",
+        "adc25139-e6f6-432a-879b-1f05e6bd32b8",
+        "d371511b-f8d7-4468-8e9f-d540e7c0d7b6",
+        "0c90948f-f1db-42cb-8b6c-5c43cfa99d41",
+        "a604b4c1-637c-454a-b4a1-e4a5c1af0c18"
+    };
+
+    private async Task<string> Login()
+    {
+        var loginBody = new { loginOrEmail = username, password = password };
+        var req = new HttpRequestMessage(HttpMethod.Post, "http://localhost:9000/api/identity/v1/users/login")
+        {
+            Content = new StringContent(JsonSerializer.Serialize(loginBody), System.Text.Encoding.UTF8, "application/json")
+        };
+        var resp = await Http.SendAsync(req);
+        if (!resp.IsSuccessStatusCode)
+            throw new Exception("Invalid login.");
+        var json = await resp.Content.ReadAsStringAsync();
+        var doc = JsonDocument.Parse(json);
+        return doc.RootElement.GetProperty("accessToken").GetString()!;
+    }
+
+    private async Task CreateEntry()
+    {
+        creatingEntry = true;
+        try
+        {
+            var token = await Login();
+            if (string.IsNullOrEmpty(token))
+                throw new Exception("Token not received.");
+
+            var rnd = new Random();
+            var entry = new
+            {
+                amount = Math.Round(rnd.NextDouble() * 999999.9 + 0.1, 2),
+                description = Guid.NewGuid().ToString(),
+                categoryId = categories[rnd.Next(categories.Length)]
+            };
+
+            var req = new HttpRequestMessage(HttpMethod.Post, "http://localhost:9000/api/entries/v1/entries")
+            {
+                Content = new StringContent(JsonSerializer.Serialize(entry), System.Text.Encoding.UTF8, "application/json")
+            };
+            req.Headers.Authorization = new AuthenticationHeaderValue("Bearer", token);
+
+            var sw = System.Diagnostics.Stopwatch.StartNew();
+            var resp = await Http.SendAsync(req);
+            sw.Stop();
+
+            var now = DateTime.Now;
+            if (resp.IsSuccessStatusCode)
+                logs.Insert(0, new LogEntry($"{now:HH:mm:ss:fff} - Entry successfully created! ({sw.ElapsedMilliseconds} ms)", true));
+            else
+                logs.Insert(0, new LogEntry($"{now:HH:mm:ss:fff} - Error creating entry: {resp.ReasonPhrase} ({sw.ElapsedMilliseconds} ms)", false));
+        }
+        catch (Exception ex)
+        {
+            var now = DateTime.Now;
+            logs.Insert(0, new LogEntry($"{now:HH:mm:ss:fff} - Error: {ex.Message}", false));
+        }
+        finally
+        {
+            creatingEntry = false;
+            StateHasChanged();
+        }
+    }
+
+    private async Task RunStressTest()
+    {
+        running = true;
+        logs.Clear();
+        showSummary = false;
+        summary = new TestSummary();
+        StateHasChanged();
+
+        try
+        {
+            var token = await Login();
+            if (string.IsNullOrWhiteSpace(token))
+                throw new Exception("Token not received.");
+
+            List<long> responseTimes = new();
+            int completed = 0;
+            var tasks = new List<Task>();
+
+            logs.Insert(0, new LogEntry($"Starting stress test for {requestCount} parallel requests...", true));
+            StateHasChanged();
+
+            var stopwatchTest = System.Diagnostics.Stopwatch.StartNew();
+
+            for (int i = 0; i < requestCount; i++)
+            {
+                tasks.Add(Task.Run(async () =>
+                {
+                    var startTime = DateTime.Now;
+                    var sw = System.Diagnostics.Stopwatch.StartNew();
+
+                    try
+                    {
+                        var url = $"http://localhost:9000/api/consolidations/v1/dailyentries/entries/{selectedDate:yyyy-MM-dd}";
+                        var req = new HttpRequestMessage(HttpMethod.Get, url);
+                        req.Headers.Authorization = new AuthenticationHeaderValue("Bearer", token);
+                        var resp = await Http.SendAsync(req);
+                        sw.Stop();
+
+                        lock (responseTimes)
+                            responseTimes.Add(sw.ElapsedMilliseconds);
+
+                        var msg = $"{startTime:HH:mm:ss:fff} - Response in {sw.ElapsedMilliseconds} ms - {(resp.IsSuccessStatusCode ? "Success" : $"Error: {resp.StatusCode}")}";
+                        logs.Insert(0, new LogEntry(msg, resp.IsSuccessStatusCode));
+                    }
+                    catch (Exception ex)
+                    {
+                        sw.Stop();
+                        lock (responseTimes)
+                            responseTimes.Add(sw.ElapsedMilliseconds);
+
+                        var msg = $"{startTime:HH:mm:ss:fff} - Error: {ex.Message} ({sw.ElapsedMilliseconds} ms)";
+                        logs.Insert(0, new LogEntry(msg, false));
+                    }
+
+                    Interlocked.Increment(ref completed);
+                    InvokeAsync(StateHasChanged);
+                }));
+            }
+
+            await Task.WhenAll(tasks);
+
+            stopwatchTest.Stop();
+
+            summary.Total = completed;
+            summary.TotalTime = (long)stopwatchTest.ElapsedMilliseconds;
+            summary.AvgPerSecond = stopwatchTest.Elapsed.TotalSeconds > 0
+                ? Math.Round(completed / stopwatchTest.Elapsed.TotalSeconds, 2)
+                : 0;
+
+            showSummary = true;
+            logs.Insert(0, new LogEntry($"Stress test finished. {completed} requests processed.", true));
+        }
+        catch (Exception ex)
+        {
+            logs.Insert(0, new LogEntry($"Error running stress test: {ex.Message}", false));
+        }
+        finally
+        {
+            running = false;
+            StateHasChanged();
+        }
+    }
+
+    class LogEntry
+    {
+        public string Message { get; }
+        public bool IsSuccess { get; }
+        public LogEntry(string message, bool isSuccess)
+        {
+            Message = message;
+            IsSuccess = isSuccess;
+        }
+    }
+
+    class TestSummary
+    {
+        public int Total { get; set; }
+        public double AvgPerSecond { get; set; }
+        public long MaxResponseTime { get; set; }
+        public long TotalTime { get; set; }
+    }
+}

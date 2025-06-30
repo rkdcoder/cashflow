@@ -1,0 +1,25 @@
+receivers:
+  otlp:
+    protocols:
+      grpc:
+      http:
+
+exporters:
+  otlp:
+    endpoint: cashflow-jaeger:4317
+    tls:
+      insecure: true
+  elasticsearch:
+    endpoints: ["http://cashflow-elasticsearch:9200"]
+    logs_index: "logs"
+  logging:
+    loglevel: debug
+
+service:
+  pipelines:
+    traces:
+      receivers: [otlp]
+      exporters: [otlp, logging]
+    logs:
+      receivers: [otlp]
+      exporters: [elasticsearch, logging]

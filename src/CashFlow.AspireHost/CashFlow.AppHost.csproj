@@ -1,0 +1,35 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <Sdk Name="Aspire.AppHost.Sdk" Version="9.0.0" />
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net9.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <IsAspireHost>true</IsAspireHost>
+    <UserSecretsId>511e4bf2-d053-4b97-a7c5-8ada7e930328</UserSecretsId>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Aspire.Hosting.AppHost" Version="9.3.1" />
+    <PackageReference Include="Aspire.Hosting.PostgreSQL" Version="9.3.1" />
+    <PackageReference Include="Elastic.Aspire.Hosting.Elasticsearch" Version="9.3.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\CashFlow.ApiGateway\CashFlow.ApiGateway.csproj" />
+    <ProjectReference Include="..\CashFlow.Consolidations.Api\CashFlow.Consolidations.Api.csproj" />
+    <ProjectReference Include="..\CashFlow.Entries.Api\CashFlow.Entries.Api.csproj" />
+    <ProjectReference Include="..\CashFlow.IdentityAndAccess.Api\CashFlow.IdentityAndAccess.Api.csproj" />
+	  <ProjectReference Include="..\CashFlow.StressTester\CashFlow.StressTester.csproj" />
+	  <ProjectReference Include="..\CashFlow.ServiceDefaults\CashFlow.ServiceDefaults.csproj" IsAspireProjectResource="false" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="otel-collector-config.yaml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
+</Project>

@@ -1,0 +1,656 @@
+{
+	"info": {
+		"_postman_id": "624a487c-de53-462e-8817-bdc4ef78031a",
+		"name": "Teste Opah",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "46237519"
+	},
+	"item": [
+		{
+			"name": "USERS",
+			"item": [
+				{
+					"name": "ADMIN_TOKEN",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"let data = pm.response.json();\r",
+									"pm.globals.set(\"jwt_token_opah\", data.accessToken);\r",
+									"pm.globals.set(\"refresh_token_opah\", data.refreshToken);"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"protocolVersion": "http1"
+					},
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"loginOrEmail\": \"admin\",\r\n  \"password\": \"OpahIt2025\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:9000/api/identity/v1/users/login",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9000",
+							"path": [
+								"api",
+								"identity",
+								"v1",
+								"users",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "MANAGER_TOKEN",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"let data = pm.response.json();\r",
+									"pm.globals.set(\"jwt_token_opah\", data.accessToken);\r",
+									"pm.globals.set(\"refresh_token_opah\", data.refreshToken);"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"loginOrEmail\": \"manager\",\r\n  \"password\": \"OpahIt2025\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:9000/api/identity/v1/users/login",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9000",
+							"path": [
+								"api",
+								"identity",
+								"v1",
+								"users",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "USER_TOKEN",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"let data = pm.response.json();\r",
+									"pm.globals.set(\"jwt_token_opah\", data.accessToken);\r",
+									"pm.globals.set(\"refresh_token_opah\", data.refreshToken);"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"loginOrEmail\": \"user\",\r\n  \"password\": \"OpahIt2025\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:9000/api/identity/v1/users/login",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9000",
+							"path": [
+								"api",
+								"identity",
+								"v1",
+								"users",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "USING_REFRESH_TOKEN",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"let data = pm.response.json();\r",
+									"pm.globals.set(\"jwt_token_opah\", data.accessToken);\r",
+									"pm.globals.set(\"refresh_token_opah\", data.refreshToken);"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"refreshToken\": \"{{refresh_token_opah}}\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:9000/api/identity/v1/users/refresh-token",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9000",
+							"path": [
+								"api",
+								"identity",
+								"v1",
+								"users",
+								"refresh-token"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "ENTRIES",
+			"item": [
+				{
+					"name": "GET_ALL_CATEGORIES",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwt_token_opah}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:9000/api/entries/v1/categories",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9000",
+							"path": [
+								"api",
+								"entries",
+								"v1",
+								"categories"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET_ALL_ENTRY_TYPES",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwt_token_opah}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:9000/api/entries/v1/entrytypes",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9000",
+							"path": [
+								"api",
+								"entries",
+								"v1",
+								"entrytypes"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "CREATE_NEW_CATERGORY",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwt_token_opah}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"name\": \"TRAVEL\",\r\n  \"entryTypeId\": \"880fd242-952b-4b4a-82ca-9a32a2e3866c\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:9000/api/entries/v1/categories",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9000",
+							"path": [
+								"api",
+								"entries",
+								"v1",
+								"categories"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "CREATE_ENTRY",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwt_token_opah}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"amount\": 123.45,\r\n  \"description\": \"My new entry\",\r\n  \"categoryId\": \"f841be5a-9923-419b-87a2-c3654e02620a\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:9000/api/entries/v1/entries",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9000",
+							"path": [
+								"api",
+								"entries",
+								"v1",
+								"entries"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "CREATE_RANDOM_ENTRY",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"const amount = Math.floor(Math.random() * 1000) + 1;\r",
+									"const categories = [\r",
+									"    \"cbb3f1ea-91cb-42e8-8daf-f68bfa520c2f\",\r",
+									"    \"f841be5a-9923-419b-87a2-c3654e02620a\",\r",
+									"    \"fdaacfad-b3c9-4c5a-9c3b-3ce9667fabed\",\r",
+									"    \"929ed0ff-d817-4a82-8124-3dfcd6a1f9ce\",\r",
+									"    \"b0c380a7-8472-4e45-a04d-5f9920b2877a\",\r",
+									"    \"63eb96fe-2c91-43b9-b415-c65ee867e2bd\",\r",
+									"    \"283b1aca-ef7a-4fce-bcbb-8752e2153c08\",\r",
+									"    \"a11d43e6-96d6-415f-b2fe-6f0a55970eb9\",\r",
+									"    \"f38043ac-9294-4909-af22-e260f9e871bb\",\r",
+									"    \"56e7533b-4e48-4483-b387-4aee71e454bd\",\r",
+									"    \"47b934b2-e7ec-4dd9-b89e-f542b37505ca\",\r",
+									"    \"96d8efc8-61f1-4007-9917-0862b0f2f57a\",\r",
+									"    \"c5617a27-be6e-4848-82e8-bbf0f6548097\",\r",
+									"    \"b1ac6638-318d-423f-8c4c-fa3f614fd2e1\",\r",
+									"    \"054a551e-9841-4bef-ad35-8bb9a381a916\",\r",
+									"    \"c87bfe80-d970-410f-b503-5355c5a372d3\",\r",
+									"    \"adc25139-e6f6-432a-879b-1f05e6bd32b8\",\r",
+									"    \"d371511b-f8d7-4468-8e9f-d540e7c0d7b6\",\r",
+									"    \"0c90948f-f1db-42cb-8b6c-5c43cfa99d41\",\r",
+									"    \"a604b4c1-637c-454a-b4a1-e4a5c1af0c18\"\r",
+									"    ];\r",
+									"\r",
+									"const randomIndex = Math.floor(Math.random() * categories.length);\r",
+									"const categoryId = categories[randomIndex];\r",
+									"\r",
+									"pm.environment.set(\"amount\", amount);\r",
+									"pm.environment.set(\"description\", \"Just a test\");\r",
+									"pm.environment.set(\"categoryId\", categoryId);"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"let index = parseInt(pm.environment.get(\"seedIndex\") || \"0\");\r",
+									"let total = parseInt(pm.environment.get(\"seedTotal\") || \"50\");\r",
+									"\r",
+									"if (index < total - 1) {\r",
+									"    pm.environment.set(\"seedIndex\", index + 1);\r",
+									"    postman.setNextRequest(\"Seed Entries\");\r",
+									"} else {\r",
+									"    pm.environment.unset(\"seedIndex\");\r",
+									"    pm.environment.unset(\"amount\");\r",
+									"    pm.environment.unset(\"description\");\r",
+									"    pm.environment.unset(\"categoryId\");\r",
+									"    pm.environment.unset(\"seedTotal\");\r",
+									"    postman.setNextRequest(null); \r",
+									"}\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwt_token_opah}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"amount\": {{amount}},\r\n  \"description\": \"{{description}}\",\r\n  \"categoryId\": \"{{categoryId}}\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:9000/api/entries/v1/entries",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9000",
+							"path": [
+								"api",
+								"entries",
+								"v1",
+								"entries"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET_ALL_ENTRIES_DATE_RANGE",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwt_token_opah}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:9000/api/entries/v1/entries?start=2025-06-01&end=2026-06-30",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9000",
+							"path": [
+								"api",
+								"entries",
+								"v1",
+								"entries"
+							],
+							"query": [
+								{
+									"key": "start",
+									"value": "2025-06-01"
+								},
+								{
+									"key": "end",
+									"value": "2026-06-30"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET_ENTRY_DETAILS",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwt_token_opah}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:9000/api/entries/v1/entries/{{first_entry_id_opah}}",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9000",
+							"path": [
+								"api",
+								"entries",
+								"v1",
+								"entries",
+								"{{first_entry_id_opah}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "UPDATE_ENTRY",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwt_token_opah}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"amount\": 98.76,\r\n  \"description\": \"My updated entry.\",\r\n  \"categoryId\": \"cbb3f1ea-91cb-42e8-8daf-f68bfa520c2f\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:9000/api/entries/v1/entries/{{first_entry_id_opah}}",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9000",
+							"path": [
+								"api",
+								"entries",
+								"v1",
+								"entries",
+								"{{first_entry_id_opah}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DELETE_ENTRY",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwt_token_opah}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:9000/api/entries/v1/entries/{{first_entry_id_opah}}",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9000",
+							"path": [
+								"api",
+								"entries",
+								"v1",
+								"entries",
+								"{{first_entry_id_opah}}"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "CONSOLIDATIONS",
+			"item": [
+				{
+					"name": "GET_CONSOLIDATED_DAY",
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
+				},
+				{
+					"name": "GET_CONSOLIDATED_ALL",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwt_token_opah}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:9000/api/consolidations/v1/dailyentries/entries/all",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9000",
+							"path": [
+								"api",
+								"consolidations",
+								"v1",
+								"dailyentries",
+								"entries",
+								"all"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
