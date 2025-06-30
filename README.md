@@ -53,7 +53,7 @@ A solução foi organizada conforme definido no desenho a seguir, garantindo cla
 - Serviços definidos conforme domínios específicos (Identity, Entries, Consolidations).
   
   ```
-  ashFlow.sln
+  CashFlow.sln
   Soluction Items/
   src/
   ├── CashFlow.ApiGateway
