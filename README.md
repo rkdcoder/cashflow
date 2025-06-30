@@ -217,6 +217,11 @@ A solução foi organizada conforme definido no desenho a seguir, garantindo cla
   <img src="https://raw.githubusercontent.com/rkdcoder/cashflow/main/Docs/diagrams/cashflow-context-diagram.png" alt="Context Diagram">
 </p>
 
+# Diagrama de Evento e Comunicação
+<p align="center">
+  <img src="https://raw.githubusercontent.com/rkdcoder/cashflow/main/Docs/diagrams/cashflow-event-diagram.png" alt="Event Diagram">
+</p>
+
 # Como Executar a Solução CashFlow
 
 A solução **CashFlow** é totalmente orquestrada pelo **.NET Aspire**. Isso significa que você não precisa se preocupar em subir cada serviço manualmente: o projeto principal (`CashFlow.AppHost`) é responsável por iniciar e orquestrar todos os demais serviços e dependências automaticamente.
