@@ -302,4 +302,4 @@ Para rodar o stress test:
 
 ---
 
-Dúvidas ou problemas? Consulte os logs da Aspire UI e da aplicação para identificar eventuais erros na subida dos containers ou serviços.
+Consulte os logs da Aspire UI e da aplicação para identificar eventuais erros na subida dos containers ou serviços.
