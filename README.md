@@ -202,6 +202,13 @@ A solução foi organizada conforme definido no desenho a seguir, garantindo cla
 
 A solução **CashFlow** é totalmente orquestrada pelo **.NET Aspire**. Isso significa que você não precisa se preocupar em subir cada serviço manualmente: o projeto principal (`CashFlow.AppHost`) é responsável por iniciar e orquestrar todos os demais serviços e dependências automaticamente.
 
+### Credenciais iniciais
+
+```
+usuario: admin
+senha: OpahIt2025
+```
+
 ## Pré-requisitos
 
 - **Docker** instalado e rodando
