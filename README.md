@@ -56,7 +56,7 @@ A solução foi organizada conforme definido no desenho a seguir, garantindo cla
   
   ```
   CashFlow.sln
-  Soluction Items/
+  Solution Items/
   src/
   ├── CashFlow.ApiGateway
   ├── CashFlow.AppHost
