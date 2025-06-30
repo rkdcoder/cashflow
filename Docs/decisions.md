@@ -14,6 +14,41 @@ Todas as configurações críticas da solução são provenientes do `appsetting
 * **YARP (Yet Another Reverse Proxy):** Centraliza as APIs, facilita o balanceamento de carga e o dimensionamento horizontal automático, garantindo alta disponibilidade. Com ele, é possível facilmente adicionar servidores adicionais, prevenindo degradação de desempenho mesmo durante picos de uso.
 * Comunicação via **HTTP** simplifica o desenvolvimento local, mas em produção é obrigatório o uso de **HTTPS** com certificados SSL/TLS válidos, garantindo segurança robusta contra interceptações e ataques man-in-the-middle.
 
+### Diferenciação entre AppHost e ApiGateway
+
+A arquitetura do CashFlow foi desenhada para refletir a separação de responsabilidades entre dois componentes essenciais:
+
+#### CashFlow\.AppHost
+
+O **AppHost** é o ponto de entrada padrão gerado pelo **.NET Aspire** para a execução e orquestração dos diversos serviços e aplicações do sistema. Ele atua como o *componente principal de inicialização* (host de aplicações), sendo responsável por:
+
+* Gerenciar o ciclo de vida dos serviços no ambiente de desenvolvimento e produção.
+* Orquestrar dependências, inicializando APIs, workers, serviços de infraestrutura, mensageria e observabilidade.
+* Facilitar a configuração centralizada e injeção de dependências.
+* Permitir que todos os serviços possam ser levantados e gerenciados em conjunto durante o desenvolvimento, simplificando o onboarding e a execução local.
+
+> **Resumindo:**
+> O AppHost é o host centralizado para orquestração dos serviços do ecossistema CashFlow, baseado em .NET Aspire.
+
+#### CashFlow\.ApiGateway
+
+O **ApiGateway** é o projeto responsável por atuar como um *proxy reverso* (reverse proxy) e ponto único de entrada para requisições externas ao sistema. Suas responsabilidades incluem:
+
+* Centralizar e roteirizar todas as chamadas para as APIs internas (Entries, Consolidations, IdentityAndAccess, etc).
+* Realizar autenticação, autorização, versionamento de API e políticas de segurança em um único ponto.
+* Aplicar regras de rate limiting, logging, tracing, agregação de respostas e balanceamento de carga.
+* Facilitar o desacoplamento entre clientes e serviços internos, protegendo-os de mudanças de endereço, versionamento e lógica de negócio.
+
+O ApiGateway é implementado normalmente com tecnologias de proxy reverso como **YARP (Yet Another Reverse Proxy)**, **Ocelot** ou **NGINX**, e pode ser integrado ao ambiente Aspire.
+
+> **Resumindo:**
+> O ApiGateway expõe uma interface única para consumidores externos, encaminhando requisições para os serviços internos de forma segura, eficiente e controlada.
+
+### Resumo Visual
+
+* **AppHost:** Orquestrador de serviços (interno, usado por Aspire/.NET)
+* **ApiGateway:** Proxy reverso para entrada e roteamento de requisições externas
+
 ## Persistência de Dados
 
 * **PostgreSQL:** Banco relacional robusto, escalável e gratuito, com recursos avançados como JSONB, particionamento, suporte eficiente a transações e consultas analíticas complexas, ideal para sistemas empresariais que exigem desempenho consistente e disponibilidade.
