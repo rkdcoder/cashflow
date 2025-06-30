@@ -3,8 +3,8 @@
 Este documento descreve detalhadamente a arquitetura e as tecnologias escolhidas para o desenvolvimento do projeto CashFlow, justificando cada decisão com base nas necessidades técnicas e não funcionais descritas no desafio, além das melhores práticas de mercado.
 
 ## Decisões
-Todas as decisões a respeito desta solução podem ser encontradas no documento a seguir:
-[DESCISÕES](https://github.com/rkdcoder/cashflow/blob/main/Docs/decisions.md)
+Todas as Decisões Arquiteturais podem ser encontradas no documento a seguir: 
+[DESCISÕES ARQUITETURAIS](https://github.com/rkdcoder/cashflow/blob/main/Docs/decisions.md)
 
 ## Requisitos Funcionais
 
