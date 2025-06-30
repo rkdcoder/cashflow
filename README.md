@@ -160,7 +160,7 @@ A solução foi organizada conforme definido no desenho a seguir, garantindo cla
   │   ├── Dtos
   │   ├── Exceptions
   │   │   ├── Application
-  │   │   └── Application
+  │   │   └── Core
   │   ├── Logging
   │   ├── Serialization
   │   ├── Utilities
