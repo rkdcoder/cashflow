@@ -42,7 +42,9 @@ Essa separação visa assegurar independência, resiliência e escalabilidade, p
 
 ## Arquitetura
 
-O projeto segue princípios de Domain-Driven Design (DDD) e Clean Architecture. Esta escolha garante alta coesão e baixo acoplamento, permitindo o reaproveitamento de código (DRY) e uma aplicação clara dos princípios SOLID.
+O projeto segue os princípios de Domain-Driven Design (DDD), CQRS (Command Query Responsibility Segregation) e Clean Architecture.
+Essa combinação garante alta coesão e baixo acoplamento, separando de forma clara as operações de leitura e escrita, facilitando escalabilidade, performance, reaproveitamento de código (DRY) e aplicação dos princípios SOLID.
+Além disso, proporciona total controle sobre os fluxos da aplicação e favorece a evolução contínua do sistema com simplicidade e robustez.
 
 ## Estrutura do Projeto
 
