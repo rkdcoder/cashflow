@@ -198,7 +198,9 @@ A solução foi organizada conforme definido no desenho a seguir, garantindo cla
   README.md
   ```
 # Diagrama de Arquitetura
-<img src="[caminho/para/imagem.jpg](https://github.com/rkdcoder/cashflow/blob/main/Docs/diagrams/cashflow-architectural-diagram.png)" alt="Diagrama de Arquitetura" width="600"/>
+<p align="center">
+  <img src="https://raw.githubusercontent.com/rkdcoder/cashflow/main/Docs/diagrams/cashflow-architectural-diagram.png" alt="Cashflow Architectural Diagram">
+</p>
 
 # Como Executar a Solução CashFlow
 
