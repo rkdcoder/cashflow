@@ -4,7 +4,7 @@ Este documento descreve detalhadamente a arquitetura e as tecnologias escolhidas
 
 ## Decisões
 Todas as Decisões Arquiteturais podem ser encontradas no documento a seguir: 
-[DESCISÕES ARQUITETURAIS](https://github.com/rkdcoder/cashflow/blob/main/Docs/decisions.md)
+[DECISÕES ARQUITETURAIS](https://github.com/rkdcoder/cashflow/blob/main/Docs/decisions.md)
 
 ## Requisitos Funcionais
 
