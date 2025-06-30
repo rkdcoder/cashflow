@@ -13,7 +13,6 @@ namespace CashFlow.Entries.Infrastructure.Data
     {
         public EntriesDbContext CreateDbContext(string[] args)
         {
-            // Use o caminho do diretório do projeto de infraestrutura
             var basePath = Directory.GetCurrentDirectory();
 
             var configuration = new ConfigurationBuilder()
