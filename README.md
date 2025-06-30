@@ -75,7 +75,7 @@ A solução foi organizada conforme definido no desenho a seguir, garantindo cla
   │   │   ├── Query
   │   │   └── QueryHandler
   │   └── Extensions
-  ├── CashFlow.Consolidations.Api
+  ├── CashFlow.Entries.Api
   │   ├── Controllers
   │   │   └── V1
   │   └── Extensions
@@ -137,7 +137,7 @@ A solução foi organizada conforme definido no desenho a seguir, garantindo cla
   │   └── Users
   │       ├── Entities
   │       └── Repositories
-  ├── CashFlow.Entries.Infrastructure
+  ├── CashFlow.IdentityAndAccess.Infrastructure
   │   ├── Authentication
   │   ├── Data
   │   ├── DependencyInjection
