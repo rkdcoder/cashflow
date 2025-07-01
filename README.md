@@ -283,7 +283,7 @@ Execute o projeto **CashFlow.AppHost**. Ele é responsável por inicializar todo
 No terminal/prompt, rode:
 
 ```bash
-dotnet run --project .\src\CashFlow.AspireHost\CashFlow.AppHost.csproj
+dotnet run --project src/CashFlow.AspireHost/CashFlow.AppHost.csproj
 ```
 
 Ou, se estiver usando Visual Studio, basta marcar o projeto `CashFlow.AppHost` como *startup* e pressionar F5.
