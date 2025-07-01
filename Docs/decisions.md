@@ -2,7 +2,7 @@
 
 ## Plataforma e Framework
 
-* **.NET Core 9:** Escolhido pela modernidade, alta performance, robustez pós-preview, segurança aprimorada e suporte de longo prazo. Além disso, oferece facilidade de manutenção, uma comunidade ativa e integração perfeita com ferramentas modernas e práticas DevOps, tornando-se ideal para soluções escaláveis e resilientes.
+* **.NET Core 9:** Escolhido pela modernidade, alta performance, robustez pós-preview e segurança aprimorada. Além disso, oferece facilidade de manutenção, uma comunidade ativa e integração perfeita com ferramentas modernas e práticas DevOps, tornando-se ideal para soluções escaláveis e resilientes.
 * **.NET Aspire:** Utilizado para observabilidade e orquestração, permitindo gerenciamento eficiente dos serviços distribuídos, diagnósticos detalhados e monitoramento contínuo através do OpenTelemetry, essenciais para garantir resiliência e alta disponibilidade.
 
 ## Flexibilidade via Configurações Centralizadas
