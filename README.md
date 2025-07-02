@@ -178,7 +178,7 @@ A solução foi organizada conforme definido no desenho a seguir, garantindo cla
   │       ├── Categories
   │       │   ├── CommandHandler
   │       │   └── QueryHandler
-  │       └── Categories
+  │       └── Entries
   │           ├── CommandHandler
   │           └── QueryHandler
   ├── CashFlow.IdentityAndAccess.Tests
@@ -188,7 +188,7 @@ A solução foi organizada conforme definido no desenho a seguir, garantindo cla
   │       └── Users
   │           ├── CommandHandler
   │           └── QueryHandler
-  ├── CashFlow.Shared.Tests
+  ├── CashFlow.Infrastructure.Shared.Tests
   │   ├── Caching
   │   ├── Exceptions
   │   └── Identity
